@@ -4,6 +4,10 @@
 
 ## 2. Key Features:
 
-- Create an stationary product.
-- Seach stationary product by category, name and brand.
-- Search specfic stationary project by id.
+- To create an stationary product.
+- To seach stationary product by category, name and brand.
+- To Search specfic stationary project by id.
+- To update specific stationary product by id.
+- To delete specific stationary product by id.
+- To create an order for available products.
+- To callculate revenue for all oreders.
