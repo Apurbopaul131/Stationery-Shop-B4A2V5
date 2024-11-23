@@ -11,3 +11,10 @@
 - To delete specific stationary product by id.
 - To create an order for available products.
 - To callculate revenue for all oreders.
+
+## Backend Technology Used:
+
+- Typescript
+- Express Js
+- Mongoose
+- MongoDB
