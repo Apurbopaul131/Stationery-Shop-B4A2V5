@@ -40,7 +40,6 @@ const updateSingleProductToDb = async (
 };
 //delete specific product by id form db
 const deleteSingleProductToDb = async (id: string) => {
-  console.log(id);
   const result = await StationeryProductModel.findByIdAndDelete(id);
   return result;
 };

@@ -27,9 +27,7 @@ const createProduct = async (req: Request, res: Response) => {
 const getProducts = async (req: Request, res: Response): Promise<any> => {
   try {
     const searchTerm = req.query.searchTerm;
-    console.log(typeof searchTerm);
     const result = await ProductServices.getProductsToDb(searchTerm as string);
-    console.log(result);
 
     //Execute the data does not exist in database
     if (result === undefined || result.length == 0) {
