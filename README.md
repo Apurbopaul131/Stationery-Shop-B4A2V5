@@ -25,8 +25,6 @@
 
 Run the following command in your terminal to clone the repository:
 
-## Code Block
-
 ```javascript
 git clone https://github.com/Apollo-Level2-Web-Dev/batch-4-assignment-2.git
 ```
