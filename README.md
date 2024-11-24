@@ -172,4 +172,4 @@ http://localhost:5000/api/orders/revenue
 
 ```
 
-## 6. [Project Live Link](https://stationery-shop-theta.vercel.app/):
+## 6. Project Live link: https://stationery-shop-theta.vercel.app/
