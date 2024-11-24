@@ -1,8 +1,10 @@
-"# Stationery-Shop-B4A2V5"
+# Stationery-Shop-B4A2V5
 
-## 1. Project Title: This is Stationary shop project that controls all work related to stationary shop.
+## Project Name: Stationary-Shop
 
-## 2. Key Features:
+## 2. Project Title: This is Stationary shop project that controls all work related to stationary shop.
+
+## 3. Key Features:
 
 - To create an stationary product.
 - To seach stationary product by category, name and brand.
@@ -12,14 +14,14 @@
 - To create an order for available products.
 - To callculate revenue for all oreders.
 
-## 3. Backend Technology Used:
+## 4. Backend Technology Used:
 
 - Typescript
 - Express Js
 - Mongoose
 - MongoDB
 
-## 4. How to Install and Run the Project:
+## 5. How to Install and Run the Project:
 
 ### 1. Must be ensure the following prerequisites are already installed in your computer
 
@@ -27,7 +29,7 @@
 - npm (comes with Node.js) or yarn
 - MongoDB (local or cloud-based)
 
-### 1. Clone the Repository
+### 2. Clone the Repository
 
 Run the following command in your terminal to clone the repository:
 
@@ -35,7 +37,7 @@ Run the following command in your terminal to clone the repository:
 git clone https://github.com/Apollo-Level2-Web-Dev/batch-4-assignment-2.git
 ```
 
-### 2. Navigate to the Project Directory
+### 3. Navigate to the Project Directory
 
 Run the following command to by adding expected directory name:
 
@@ -43,7 +45,7 @@ Run the following command to by adding expected directory name:
 cd your-repo-name
 ```
 
-### 3. Navigate to the Project Directory
+### 4. Navigate to the Project Directory
 
 Install the required dependencies using npm or yarn:
 
@@ -53,7 +55,7 @@ npm install
 yarn install
 ```
 
-### 4. Set Up Environment Variables
+### 5. Set Up Environment Variables
 
 Create a .env file in the root directory of the project and add the following environment variables to configure your application:
 
@@ -65,7 +67,7 @@ DATABASE_URL: mongodb+srv://<db_username>:<db_password>@newmission.cmtjh.mongodb
 //Replace your <db_username>, <db_password> and database name.
 ```
 
-### 5. Start MongoDB
+### 6. Start MongoDB
 
 Make sure your MongoDB instance is running:
 
@@ -77,7 +79,7 @@ mongod;
 
 - If using a cloud-based database like MongoDB Atlas ensure your connection string in .env is correctly configured.
 
-### 6. Run the Project
+### 7. Run the Project
 
 ```javascript
 //development mode
@@ -86,7 +88,7 @@ npm run start:dev
 npm run start:prod
 ```
 
-### 7. Access the API
+### 8. Access the API
 
 Once the server is running, you can access the API at:
 
@@ -94,12 +96,13 @@ Once the server is running, you can access the API at:
 http://localhost:5000
 ```
 
-### 8. Test the Api using postman or Api dog
+### 9. Test the Api using postman or Api dog
 
 - Create a Stationery Product:
 
 ```javascript
-POST: http://localhost:5000/api/products
+// Method: post
+http://localhost:5000/api/products
 
 //Test data:
 {
@@ -112,3 +115,61 @@ POST: http://localhost:5000/api/products
   "inStock": true
 }
 ```
+
+- Get All Stationery Products:
+
+```javascript
+// Method: get
+http://localhost:5000/api/products?searchTerm=Office Supplies
+
+```
+
+- Get a Specific Stationery Product
+
+```javascript
+// Method: get
+http://localhost:5000/api/products/:productId
+
+```
+
+- Update a Stationery Product
+
+```javascript
+// Method: put
+http://localhost:5000/api/products/:productId
+
+```
+
+- Delete a Stationery Product
+
+```javascript
+// Method: delete
+http://localhost:5000/api/products/:productId
+
+```
+
+- Order a Stationery Product
+
+```javascript
+// Method: post
+http://localhost:5000/api/orders
+
+//Test data
+{
+  "email": "customer@example.com",
+  "product": "648a45e5f0123c45678d9012",
+  "quantity": 2,
+  "totalPrice": 36
+}
+
+```
+
+- Calculate Revenue from Orders
+
+```javascript
+// Method: get
+http://localhost:5000/api/orders/revenue
+
+```
+
+## Project Live Link:
