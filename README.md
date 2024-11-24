@@ -52,8 +52,21 @@ yarn install
 Create a .env file in the root directory of the project and add the following environment variables to configure your application:
 
 ```javascript
+//.env
 PORT:5000
 DATABASE_URL: mongodb+srv://<db_username>:<db_password>@newmission.cmtjh.mongodb.net/?retryWrites=true&w=majority&appName=Newmission
 
 //Replace your <db_username>, <db_password> and database name.
 ```
+
+### 5. Start MongoDB
+
+Make sure your MongoDB instance is running:
+
+- If running locally, start MongoDB with:
+
+```javascript
+mongod;
+```
+
+- If using a cloud-based database like MongoDB Atlas ensure your connection string in .env is correctly configured.
