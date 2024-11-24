@@ -1,6 +1,7 @@
 import express from "express";
 import { ordersControllers } from "./oreder.controller";
 
+//create router object
 const router = express.Router();
 
 //create post route to handle all post request to client

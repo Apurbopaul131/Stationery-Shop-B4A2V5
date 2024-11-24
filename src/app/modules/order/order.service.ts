@@ -8,13 +8,13 @@ const findOrderdProductToProductCollection = async (productId: string) => {
   return result;
 };
 
-//Create an oreder to orders collecion
+//Create an order to orders collecion
 const createOrder = async (orderData: Order) => {
   const result = await OrderModel.create(orderData);
   return result;
 };
 
-//Callculat total revenue from all database orders
+//Callculate total revenue from all database orders
 const callculateTotalRevenueToDB = async () => {
   const result = await OrderModel.aggregate([
     //stage-1

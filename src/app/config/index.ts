@@ -4,6 +4,7 @@ import pathModule from "path";
 //add path
 dotenv.config({ path: pathModule.join(process.cwd(), ".env") });
 
+//export
 export default {
   port: process.env.PORT,
   database_url: process.env.DATABASE_URL,

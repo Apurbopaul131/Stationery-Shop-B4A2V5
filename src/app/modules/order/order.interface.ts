@@ -1,3 +1,4 @@
+//interface
 export interface Order {
   email: string;
   product: string;

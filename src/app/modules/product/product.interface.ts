@@ -1,3 +1,4 @@
+//create interface and export
 export type TStationeryProduct = {
   name: string;
   brand: string;

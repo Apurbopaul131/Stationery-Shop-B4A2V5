@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { Order } from "./order.interface";
 
+//order schema
 const OrderSchema: Schema = new mongoose.Schema(
   {
     email: {
@@ -43,4 +44,5 @@ const OrderSchema: Schema = new mongoose.Schema(
 // Create and export the model
 const OrderModel = mongoose.model<Order>("Order", OrderSchema);
 
+//export
 export default OrderModel;

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { TStationeryProduct } from "./product.interface";
 
+//Stationary product schema
 const StationeryProductSchema = new mongoose.Schema(
   {
     name: {
@@ -58,6 +59,7 @@ const StationeryProductSchema = new mongoose.Schema(
     },
   }
 );
+//create model and export
 export const StationeryProductModel = mongoose.model<TStationeryProduct>(
   "Product",
   StationeryProductSchema

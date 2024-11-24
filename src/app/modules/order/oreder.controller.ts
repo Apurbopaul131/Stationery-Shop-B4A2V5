@@ -3,6 +3,7 @@ import { TStationeryProduct } from "../product/product.interface";
 import { ProductServices } from "../product/product.service";
 import { orderServices } from "./order.service";
 
+//Create order
 const createOrder = async (req: Request, res: Response): Promise<any> => {
   try {
     const orderProductId = req.body.product;
@@ -68,10 +69,9 @@ const createOrder = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
-//callculat total revenue
+//callculate total revenue
 const callculateRevenue = async (req: Request, res: Response): Promise<any> => {
   const result = await orderServices.callculateTotalRevenueToDB();
-  console.log(result);
   return res.status(200).json({
     message: "Revenue calculated successfully",
     success: true,

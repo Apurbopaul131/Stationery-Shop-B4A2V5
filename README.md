@@ -1,4 +1,4 @@
-# Stationery-Shop-B4A2V5
+# 1. Stationery-Shop-B4A2V5
 
 ## Project Name: Stationary-Shop
 
@@ -12,7 +12,7 @@
 - To update specific stationary product by id.
 - To delete specific stationary product by id.
 - To create an order for available products.
-- To callculate revenue for all oreders.
+- To callculate revenue for all orders.
 
 ## 4. Backend Technology Used:
 
@@ -45,7 +45,7 @@ Run the following command to by adding expected directory name:
 cd your-repo-name
 ```
 
-### 4. Navigate to the Project Directory
+### 4. Install Dependencies
 
 Install the required dependencies using npm or yarn:
 

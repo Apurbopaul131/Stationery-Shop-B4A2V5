@@ -8,7 +8,7 @@ const createProduct = async (req: Request, res: Response) => {
     res.status(200).json({
       message: "Product created successfully",
       success: true,
-      data: result, // The created product is returned by `create()`
+      data: result,
     });
   } catch (err: any) {
     res.status(400).json({
@@ -40,7 +40,7 @@ const getProducts = async (req: Request, res: Response): Promise<any> => {
     }
     //send response to client
     return res.status(200).json({
-      message: "Product created successfully",
+      message: "Products retrieved successfully",
       success: true,
       data: result,
     });
@@ -68,6 +68,7 @@ const getSingleProduct = async (req: Request, res: Response): Promise<any> => {
       return res.status(404).json({
         message: "Product not found!",
         success: false,
+        data: {},
       });
     }
 
@@ -90,6 +91,7 @@ const getSingleProduct = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
+//update specific product by id
 const updateSingleProduct = async (
   req: Request,
   res: Response
@@ -107,12 +109,13 @@ const updateSingleProduct = async (
       return res.status(404).json({
         message: "Product not found!",
         success: false,
+        data: {},
       });
     }
 
     //send response to client
     return res.status(200).json({
-      message: "Product retrieved successfully",
+      message: "Product updated successfully",
       success: true,
       data: result,
     });
@@ -129,6 +132,7 @@ const updateSingleProduct = async (
   }
 };
 
+//delete specific product by id
 const deleteSingleProduct = async (
   req: Request,
   res: Response
@@ -164,6 +168,7 @@ const deleteSingleProduct = async (
   }
 };
 
+//Export all functions
 export const ProductControllers = {
   createProduct,
   getProducts,

@@ -1,6 +1,7 @@
 import express from "express";
 import { ProductControllers } from "./product.controller";
 
+//create router object
 const router = express.Router();
 
 //create post api to handle post requsest from client
@@ -17,4 +18,5 @@ router.delete("/products/:productId", ProductControllers.deleteSingleProduct);
 
 router.put("/products/:productId", ProductControllers.updateSingleProduct);
 
+//export
 export const productRouter = router;

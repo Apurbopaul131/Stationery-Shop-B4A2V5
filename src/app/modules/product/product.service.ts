@@ -1,6 +1,7 @@
 import { TStationeryProduct } from "./product.interface";
 import { StationeryProductModel } from "./product.model";
-//
+
+//Create product to database
 const createProductToDB = async (productData: TStationeryProduct) => {
   const result = await StationeryProductModel.create(productData);
   return result;
@@ -8,13 +9,16 @@ const createProductToDB = async (productData: TStationeryProduct) => {
 
 //get products using search term
 const getProductsToDb = async (searchTerm: string) => {
-  const result = await StationeryProductModel.find({
-    $or: [
-      { category: searchTerm },
-      { brand: searchTerm },
-      { name: searchTerm },
-    ],
-  });
+  const query = searchTerm
+    ? {
+        $or: [
+          { category: searchTerm },
+          { brand: searchTerm },
+          { name: searchTerm },
+        ],
+      }
+    : {};
+  const result = await StationeryProductModel.find(query);
   return result;
 };
 

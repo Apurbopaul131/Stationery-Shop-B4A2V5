@@ -1,5 +1,5 @@
 import cors from "cors";
-import express, { Application, Request, Response } from "express";
+import express, { Application } from "express";
 import { orderRoute } from "./app/modules/order/order.routes";
 import { productRouter } from "./app/modules/product/product.routes";
 
@@ -14,7 +14,5 @@ app.use(cors());
 app.use("/api", productRouter);
 app.use("/api", orderRoute);
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello world bangladhesh");
-});
+//export
 export default app;
