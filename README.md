@@ -70,3 +70,20 @@ mongod;
 ```
 
 - If using a cloud-based database like MongoDB Atlas ensure your connection string in .env is correctly configured.
+
+### 6. Run the Project
+
+```javascript
+//development mode
+npm run start:dev
+//production mode
+npm run start:prod
+```
+
+### 7. Access the API
+
+Once the server is running, you can access the API at:
+
+```javascript
+http://localhost:5000
+```
