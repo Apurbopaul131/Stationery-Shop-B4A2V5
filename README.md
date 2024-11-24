@@ -28,25 +28,5 @@ Run the following command in your terminal to clone the repository:
 ## Code Block
 
 ```javascript
-
-// ES5 syntax
-var multiply = function(x, y) {
-  return x * y;
-};
-
-// ES6 arrow function
-var multiply = (x, y) => { return x * y; };
-
-// Or even simpler
-var multiply = (x, y) => x * y;
-
-### Links
-
-A markdown file divides links into two categories: **inline** and **relative**.
-
-#### Inline links
-
-To create an inline link in a Markdown file, wrap the link text in brackets `[ ]` followed immediately by the URL in parentheses `( )`.
-
-``
+git clone https://github.com/Apollo-Level2-Web-Dev/batch-4-assignment-2.git
 ```
