@@ -21,6 +21,12 @@
 
 ## 4. How to Install and Run the Project:
 
+### 1. Must be ensure the following prerequisites are already installed in your computer
+
+- Node.js (v16 or later)
+- npm (comes with Node.js) or yarn
+- MongoDB (local or cloud-based)
+
 ### 1. Clone the Repository
 
 Run the following command in your terminal to clone the repository:
@@ -86,4 +92,23 @@ Once the server is running, you can access the API at:
 
 ```javascript
 http://localhost:5000
+```
+
+### 8. Test the Api using postman or Api dog
+
+- Create a Stationery Product:
+
+```javascript
+POST: http://localhost:5000/api/products
+
+//Test data:
+{
+  "name": "Notebook",
+  "brand": "Moleskine",
+  "price": 15,
+  "category": "Office Supplies",
+  "description": "A high-quality notebook for professionals.",
+  "quantity": 200,
+  "inStock": true
+}
 ```
