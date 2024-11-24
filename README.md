@@ -1,6 +1,6 @@
 "# Stationery-Shop-B4A2V5"
 
-## 1. Project Title: This is Stationary shop project that all work related to stationary shop.
+## 1. Project Title: This is Stationary shop project that controls all work related to stationary shop.
 
 ## 2. Key Features:
 
@@ -12,9 +12,16 @@
 - To create an order for available products.
 - To callculate revenue for all oreders.
 
-## Backend Technology Used:
+## 3. Backend Technology Used:
 
 - Typescript
 - Express Js
 - Mongoose
 - MongoDB
+
+## 4. How to Install and Run the Project:
+
+### 1. Clone the Repository
+
+Run the following command in your terminal to clone the repository:
+`git clone https://github.com/Apurbopaul131/Stationery-Shop-B4A2V5.git`
