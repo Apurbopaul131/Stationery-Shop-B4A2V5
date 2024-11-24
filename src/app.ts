@@ -1,7 +1,7 @@
-import cors from "cors";
-import express, { Application } from "express";
-import { orderRoute } from "./app/modules/order/order.routes";
-import { productRouter } from "./app/modules/product/product.routes";
+import cors from 'cors';
+import express, { Application, Request, Response } from 'express';
+import { orderRoute } from './app/modules/order/order.routes';
+import { productRouter } from './app/modules/product/product.routes';
 
 const app: Application = express();
 
@@ -11,8 +11,16 @@ app.use(express.json());
 app.use(cors());
 
 //application routes
-app.use("/api", productRouter);
-app.use("/api", orderRoute);
+app.use('/api', productRouter);
+app.use('/api', orderRoute);
 
+//check application running or not
+app.get('/', (req: Request, res: Response) => {
+  res.json({
+    messsage: 'server running!',
+    success: true,
+    data: {},
+  });
+});
 //export
 export default app;
