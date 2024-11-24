@@ -1,6 +1,6 @@
-# 1. Stationery-Shop-B4A2V5
+# Stationery-Shop-B4A2V5
 
-## Project Name: Stationary-Shop
+## 1. Project Name: Stationary-Shop
 
 ## 2. Project Title: This is Stationary shop project that controls all work related to stationary shop.
 
@@ -172,4 +172,4 @@ http://localhost:5000/api/orders/revenue
 
 ```
 
-## Project Live Link:
+## 6. Project Live Link:
