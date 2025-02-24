@@ -1,7 +1,11 @@
+import { Types } from 'mongoose';
+
+export type TOrderStatus = 'Pending' | 'Shipping';
 //interface
-export interface Order {
+export type TOrder = {
   email: string;
-  product: string;
+  product: Types.ObjectId;
   quantity: number;
   totalPrice: number;
-}
+  status: TOrderStatus;
+};

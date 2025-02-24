@@ -1,18 +1,25 @@
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Application, Request, Response } from 'express';
-import { orderRoute } from './app/modules/order/order.routes';
+import globalErrorHandler from './app/middlewires/globalError';
+import notFound from './app/middlewires/notFound';
+import { AdminRouter } from './app/modules/admin/admin.route';
+import { AuthRoutes } from './app/modules/auth/auth.route';
+import { orderRouter } from './app/modules/order/order.routes';
 import { productRouter } from './app/modules/product/product.routes';
 
 const app: Application = express();
 
 //parsers
 app.use(express.json());
-//cors
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cookieParser());
 
 //application routes
+app.use('/api', AuthRoutes);
 app.use('/api', productRouter);
-app.use('/api', orderRoute);
+app.use('/api', orderRouter);
+app.use('/api', AdminRouter);
 
 //check application running or not
 app.get('/', (req: Request, res: Response) => {
@@ -22,5 +29,12 @@ app.get('/', (req: Request, res: Response) => {
     data: {},
   });
 });
+
+//global error handler
+app.use(globalErrorHandler);
+
+//Not Found
+app.use(notFound);
+
 //export
 export default app;
