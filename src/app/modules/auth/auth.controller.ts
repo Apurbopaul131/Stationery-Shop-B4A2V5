@@ -6,7 +6,7 @@ import { AuthServices } from './auth.service';
 const registerUser = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthServices.registerUserIntoDB(req.body);
   //destructure the properities to send the client
-  const { _id, name, email, role, isBlocked } = result.toObject();
+  const { _id, name, email, role, isBlocked, image } = result.toObject();
   //send response to client
   sendResponse(res, {
     statusCode: 200,
@@ -16,6 +16,7 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
       _id,
       name,
       email,
+      image,
       role,
       isBlocked,
     },
@@ -51,6 +52,7 @@ const getUser = catchAsync(async (req, res) => {
     data: {
       name: result?.name,
       email: result?.email,
+      image: result?.image,
       role: result?.role,
     },
   });

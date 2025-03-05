@@ -25,6 +25,10 @@ const userSchema = new Schema<TUser, UserModel>(
       enum: { values: role, message: '{VALUE} is not supported' },
       default: 'user',
     },
+    image: {
+      type: String,
+      required: [true, 'Image is required'],
+    },
     isBlocked: {
       type: Boolean,
       default: false,
@@ -50,7 +54,7 @@ userSchema.pre('save', async function (next) {
 userSchema.pre('save', async function (next) {
   const isUserAlreadyExistByEmailId = await User.findOne({ email: this.email });
   if (isUserAlreadyExistByEmailId) {
-    throw new AppError(409, `${this.email} is Already exist.`);
+    throw new AppError(409, `${this.email} is Already registered.`);
   }
   next();
 });

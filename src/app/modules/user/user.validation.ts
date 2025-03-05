@@ -17,6 +17,10 @@ const createUserValidationSchema = z.object({
       required_error: 'Password is required',
       invalid_type_error: 'Password must be string',
     }),
+    image: z.string({
+      required_error: 'Image is required',
+      invalid_type_error: 'Image must be string',
+    }),
     role: z
       .enum([...role] as [string, ...string[]], {
         message: 'Role must be admin | user',
