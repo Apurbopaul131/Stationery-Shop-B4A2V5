@@ -50,16 +50,13 @@ const StationeryProductSchema = new mongoose.Schema<
       type: Boolean,
       required: [true, 'inStock is required'],
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true, // Adds createdAt and updatedAt fields automatically
-    // toJSON: {
-    //   virtuals: true,
-    //   versionKey: false,
-    //   transform(doc, ret) {
-    //     delete ret.id; // Remove the `id` field
-    //   },
-    // },
   },
 );
 

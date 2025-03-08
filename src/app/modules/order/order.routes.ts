@@ -31,6 +31,11 @@ router.delete(
   auth(USER_ROLE?.admin),
   OrderControllers.cancleOrder,
 );
+router.get(
+  '/orders/verify',
+  auth(USER_ROLE.user),
+  OrderControllers.verifyPayment,
+);
 //create get route to handle all post request to client
 // router.get('/orders/revenue', OrderControllers.callculateRevenue);
 

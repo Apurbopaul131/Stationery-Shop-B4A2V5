@@ -1,6 +1,11 @@
 import { Types } from 'mongoose';
 
-export type TOrderStatus = 'Pending' | 'Shipping';
+export type TOrderStatus =
+  | 'Pending'
+  | 'Shipping'
+  | 'Paid'
+  | 'Completed'
+  | 'Cancelled';
 //interface
 export type TOrder = {
   email: string;
@@ -8,4 +13,14 @@ export type TOrder = {
   quantity: number;
   totalPrice: number;
   status: TOrderStatus;
+  transaction: {
+    id: string;
+    transactionStatus: string;
+    bank_status: string;
+    sp_code: string;
+    sp_message: string;
+    method: string;
+    date_time: string;
+    payment_status: string;
+  };
 };

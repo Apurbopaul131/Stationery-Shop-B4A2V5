@@ -6,7 +6,11 @@ import { OrderServices } from './order.service';
 // import { TStationeryProduct } from '../product/product.interface';
 
 const createOrder = catchAsync(async (req: Request, res: Response) => {
-  const result = await OrderServices.createOrderIntoDB(req.user, req.body);
+  const result = await OrderServices.createOrderIntoDB(
+    req.user,
+    req.body,
+    req.ip!,
+  );
   //send response to client
   sendResponse(res, {
     success: true,
@@ -139,10 +143,21 @@ const cancleOrder = catchAsync(async (req: Request, res: Response) => {
 //     data: result,
 //   });
 // };
+const verifyPayment = catchAsync(async (req, res) => {
+  const order = await OrderServices.verifyPayment(req.query.order_id as string);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Order verified successfully',
+    data: order,
+  });
+});
 export const OrderControllers = {
   createOrder,
   viewOrders,
   getMeOrders,
   acceptOrder,
   cancleOrder,
+  verifyPayment,
 };

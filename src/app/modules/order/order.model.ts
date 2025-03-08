@@ -38,6 +38,16 @@ const OrderSchema = new mongoose.Schema<TOrder>(
       },
       default: 'Pending',
     },
+    transaction: {
+      id: String,
+      transactionStatus: String,
+      bank_status: String,
+      sp_code: String,
+      sp_message: String,
+      method: String,
+      date_time: String,
+      payment_status: String,
+    },
   },
   {
     timestamps: true,

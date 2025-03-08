@@ -5,4 +5,4 @@ export const productCategories = [
   'Educational',
   'Technology',
 ];
-export const searchableFields = ['name', 'description'];
+export const searchableFields = ['name', 'description', 'category'];

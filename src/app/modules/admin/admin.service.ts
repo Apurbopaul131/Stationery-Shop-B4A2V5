@@ -22,6 +22,13 @@ const updateSingleProductToDb = async (
   id: string,
   data: TStationeryProduct,
 ) => {
+  const isDeleted = await StationeryProductModel.findOne({
+    _id: id,
+    isDeleted: true,
+  });
+  if (isDeleted) {
+    throw new AppError(404, 'Product not found!');
+  }
   //check product exist or not
   const product = await StationeryProductModel.findById(id);
   if (!product) {
@@ -35,12 +42,23 @@ const updateSingleProductToDb = async (
 
 //delete specific product by id form db
 const deleteSingleProductToDb = async (id: string) => {
+  const isDeleted = await StationeryProductModel.findOne({
+    _id: id,
+    isDeleted: true,
+  });
+  if (isDeleted) {
+    throw new AppError(404, 'Product not found!');
+  }
   //check product exist or not
   const product = await StationeryProductModel.findById(id);
   if (!product) {
     throw new AppError(404, 'Product not found!');
   }
-  const result = await StationeryProductModel.findByIdAndDelete(id);
+  const result = await StationeryProductModel.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    { new: true },
+  );
   return result;
 };
 
