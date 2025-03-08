@@ -8,49 +8,59 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductServices = void 0;
+const QueryBuilder_1 = __importDefault(require("../../builder/QueryBuilder"));
+const AppError_1 = __importDefault(require("../../error/AppError"));
+const product_constant_1 = require("./product.constant");
 const product_model_1 = require("./product.model");
-//Create product to database
-const createProductToDB = (productData) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield product_model_1.StationeryProductModel.create(productData);
-    return result;
-});
 //get products using search term
-const getProductsToDb = (searchTerm) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = searchTerm
-        ? {
-            $or: [
-                { category: searchTerm },
-                { brand: searchTerm },
-                { name: searchTerm },
-            ],
-        }
-        : {};
-    const result = yield product_model_1.StationeryProductModel.find(query);
-    return result;
+// const getProductsToDb = async (searchTerm: string) => {
+//   const query = searchTerm
+//     ? {
+//         $or: [
+//           { category: searchTerm },
+//           { brand: searchTerm },
+//           { name: searchTerm },
+//         ],
+//       }
+//     : {};
+//   const result = await StationeryProductModel.find(query);
+//   return result;
+// };
+const getAllproductFromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    const productQuery = new QueryBuilder_1.default(product_model_1.StationeryProductModel.find({ isDeleted: false }), query)
+        .search(product_constant_1.searchableFields)
+        .filter()
+        .sort()
+        .paginate()
+        .fields();
+    const meta = yield productQuery.countTotal();
+    const result = yield productQuery.modelQuery;
+    return {
+        meta,
+        result,
+    };
 });
 // get specific product by id from db
 const getSingleProductToDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield product_model_1.StationeryProductModel.findById(id);
-    return result;
-});
-//update product into database
-const updateSingleProductToDb = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield product_model_1.StationeryProductModel.findByIdAndUpdate(id, data, {
-        new: true,
+    const isDeleted = yield product_model_1.StationeryProductModel.findOne({
+        _id: id,
+        isDeleted: true,
     });
-    return result;
-});
-//delete specific product by id form db
-const deleteSingleProductToDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield product_model_1.StationeryProductModel.findByIdAndDelete(id);
+    if (isDeleted) {
+        throw new AppError_1.default(404, 'Product not found!');
+    }
+    const result = yield product_model_1.StationeryProductModel.findById(id).select('name brand price category description quantity inStock image');
+    if (!result) {
+        throw new AppError_1.default(404, 'Product not found!');
+    }
     return result;
 });
 exports.ProductServices = {
-    createProductToDB,
-    getProductsToDb,
     getSingleProductToDb,
-    deleteSingleProductToDb,
-    updateSingleProductToDb,
+    getAllproductFromDB,
 };
