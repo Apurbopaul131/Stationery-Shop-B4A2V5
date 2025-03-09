@@ -64,3 +64,5 @@ npm run start:dev
 //production mode
 npm run start:prod
 ```
+
+Backend live link: https://stationery-shop-theta.vercel.app
