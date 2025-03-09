@@ -14,7 +14,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: 'https://stationary-shop-client-one.vercel.app',
+    origin: 'http://localhost:5173',
     credentials: true,
   }),
 );

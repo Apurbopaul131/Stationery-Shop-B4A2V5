@@ -9,6 +9,7 @@ const createProductToDB = async (productData: TStationeryProduct) => {
   const isProductExist = await StationeryProductModel.findOne({
     name: productData?.name,
     category: productData?.category,
+    isDeleted: false,
   });
   if (isProductExist) {
     throw new AppError(409, 'Product already exist!');
