@@ -5,6 +5,7 @@ import AppError from '../../error/AppError';
 import { role } from './user.constant';
 import { TUser, UserModel } from './user.interface';
 
+//user schema
 const userSchema = new Schema<TUser, UserModel>(
   {
     name: {
@@ -59,6 +60,7 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+//This post-middewire hook is used for null the password save
 userSchema.post('save', function (doc, next) {
   //set password null
   doc.password = '';
@@ -78,4 +80,5 @@ userSchema.statics.checkLoginPasswordMatch = async function (
   const match = await bcrypt.compare(plainTextPassword, hashPassword);
   return match;
 };
+//export the model
 export const User = model<TUser, UserModel>('User', userSchema);

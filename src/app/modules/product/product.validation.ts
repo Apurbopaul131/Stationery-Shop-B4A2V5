@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { productCategories } from './product.constant';
 
+//create product schema
 const createProductValidationSchema = z.object({
   body: z.object({
     name: z
@@ -52,6 +53,7 @@ const createProductValidationSchema = z.object({
   }),
 });
 
+//update product schema
 const updateProductValidationSchema = z.object({
   body: z.object({
     name: z
@@ -111,6 +113,7 @@ const updateProductValidationSchema = z.object({
       .optional(),
   }),
 });
+//export
 export const ProductValidatios = {
   createProductValidationSchema,
   updateProductValidationSchema,

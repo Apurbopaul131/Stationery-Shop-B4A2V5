@@ -10,6 +10,7 @@ shurjopay.config(
   config.sp.sp_return_url!,
 );
 
+//This method used for intiate an payment
 const makePaymentAsync = async (
   paymentPayload: any,
 ): Promise<PaymentResponse> => {
@@ -22,6 +23,7 @@ const makePaymentAsync = async (
   });
 };
 
+//This method is used for verify the payment
 const verifiedPaymentAsync = async (
   order_id: string,
 ): Promise<VerificationResponse[]> => {

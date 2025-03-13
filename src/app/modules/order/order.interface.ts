@@ -1,12 +1,14 @@
 import { Types } from 'mongoose';
 
+//order status type
 export type TOrderStatus =
   | 'Pending'
   | 'Shipping'
   | 'Paid'
   | 'Completed'
   | 'Cancelled';
-//interface
+
+//Order type
 export type TOrder = {
   email: string;
   product: Types.ObjectId;

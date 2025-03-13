@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { z } from 'zod';
 import { orderStatus } from './order.constants';
 
+//Order validation schema
 const createOrderValidationSchema = z.object({
   body: z.object({
     product: z.string().refine((val) => mongoose.Types.ObjectId.isValid(val), {

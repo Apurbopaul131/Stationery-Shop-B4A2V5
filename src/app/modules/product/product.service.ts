@@ -3,20 +3,7 @@ import AppError from '../../error/AppError';
 import { searchableFields } from './product.constant';
 import { StationeryProductModel } from './product.model';
 
-//get products using search term
-// const getProductsToDb = async (searchTerm: string) => {
-//   const query = searchTerm
-//     ? {
-//         $or: [
-//           { category: searchTerm },
-//           { brand: searchTerm },
-//           { name: searchTerm },
-//         ],
-//       }
-//     : {};
-//   const result = await StationeryProductModel.find(query);
-//   return result;
-// };
+// get all product form DB
 const getAllproductFromDB = async (query: Record<string, unknown>) => {
   const productQuery = new QueryBuilder(
     StationeryProductModel.find({ isDeleted: false }),
@@ -52,6 +39,7 @@ const getSingleProductToDb = async (id: string) => {
   return result;
 };
 
+//export
 export const ProductServices = {
   getSingleProductToDb,
   getAllproductFromDB,

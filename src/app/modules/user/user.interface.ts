@@ -4,14 +4,17 @@ import { USER_ROLE } from './user.constant';
 
 export type TUserRole = keyof typeof USER_ROLE;
 
+//user interface
 export interface TUser {
   name: string;
   email: string;
   password: string;
   role?: TUserRole;
-  image:string;
+  image: string;
   isBlocked?: boolean;
 }
+
+//mongoose static method interface
 export interface UserModel extends Model<TUser> {
   checkUserExistByEmailId(id: string): Promise<TUser>;
   checkLoginPasswordMatch(
