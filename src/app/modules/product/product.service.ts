@@ -31,7 +31,7 @@ const getSingleProductToDb = async (id: string) => {
     throw new AppError(404, 'Product not found!');
   }
   const result = await StationeryProductModel.findById(id).select(
-    'name brand price category description quantity inStock image',
+    'name brand price category description quantity inStock image rating',
   );
   if (!result) {
     throw new AppError(404, 'Product not found!');

@@ -37,7 +37,11 @@ router.get(
   OrderControllers.verifyPayment,
 );
 //create get route to handle all post request to client
-// router.get('/orders/revenue', OrderControllers.callculateRevenue);
+router.get(
+  '/orders/revenue',
+  auth(USER_ROLE?.admin, USER_ROLE?.user),
+  OrderControllers.callculateRevenue,
+);
 
 //export router
 export const orderRouter = router;

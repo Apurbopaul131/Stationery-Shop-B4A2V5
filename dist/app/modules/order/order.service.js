@@ -15,7 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderServices = void 0;
 const AppError_1 = __importDefault(require("../../error/AppError"));
 const product_model_1 = require("../product/product.model");
+const QueryBuilder_1 = __importDefault(require("../../builder/QueryBuilder"));
 const user_model_1 = require("../user/user.model");
+const order_constants_1 = require("./order.constants");
 const order_model_1 = __importDefault(require("./order.model"));
 const order_uitls_1 = require("./order.uitls");
 //Find oredered product form product collection
@@ -69,25 +71,61 @@ const createOrderIntoDB = (userData, orderData, client_ip) => __awaiter(void 0, 
     }
     return payment === null || payment === void 0 ? void 0 : payment.checkout_url;
 });
-const viewAllOrderFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield order_model_1.default.find({
+const viewAllOrderFromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    // const result = await OrderModel.find({
+    //   'transaction.payment_status': 'Success',
+    // })
+    //   .select('email product quantity totalPrice status transaction')
+    //   .populate({
+    //     path: 'product',
+    //     select: 'name barnd price category image description quantity inStock',
+    //   });
+    // return result;
+    const orderQuery = new QueryBuilder_1.default(order_model_1.default.find({
         'transaction.payment_status': 'Success',
-    })
+    }), query)
+        .search(order_constants_1.orderSearchableFields)
+        .filter()
+        .sort()
+        .paginate()
+        .fields();
+    const meta = yield orderQuery.countTotal();
+    const result = yield orderQuery.modelQuery
         .select('email product quantity totalPrice status transaction')
         .populate({
         path: 'product',
         select: 'name barnd price category image description quantity inStock',
     });
-    return result;
+    return {
+        meta,
+        result,
+    };
 });
-const getMeOrdersFromDB = (userEmail) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield order_model_1.default.find({ email: userEmail })
+const getMeOrdersFromDB = (userEmail, query) => __awaiter(void 0, void 0, void 0, function* () {
+    // const result = await OrderModel.find({ email: userEmail })
+    //   .select('email product quantity totalPrice status transaction')
+    //   .populate({
+    //     path: 'product',
+    //     select: 'name barnd price category image description quantity inStock',
+    //   });
+    // return result;
+    const orderQuery = new QueryBuilder_1.default(order_model_1.default.find({ email: userEmail }), query)
+        .search(order_constants_1.orderSearchableFields)
+        .filter()
+        .sort()
+        .paginate()
+        .fields();
+    const meta = yield orderQuery.countTotal();
+    const result = yield orderQuery.modelQuery
         .select('email product quantity totalPrice status transaction')
         .populate({
         path: 'product',
         select: 'name barnd price category image description quantity inStock',
     });
-    return result;
+    return {
+        meta,
+        result,
+    };
 });
 const acceptOrderIntoDB = (orderId) => __awaiter(void 0, void 0, void 0, function* () {
     const isOrderExist = yield order_model_1.default.findById(orderId);
@@ -116,22 +154,22 @@ const cancleOrderIntoDB = (orderId) => __awaiter(void 0, void 0, void 0, functio
     return deletedOrder;
 });
 //Callculate total revenue from all database orders
-// const callculateTotalRevenueToDB = async () => {
-//   const result = await OrderModel.aggregate([
-//     //stage-1
-//     {
-//       $group: {
-//         _id: null,
-//         totalRevenue: { $sum: '$totalPrice' },
-//       },
-//     },
-//     //stage-2
-//     {
-//       $project: { _id: 0, totalRevenue: 1 },
-//     },
-//   ]);
-//   return result;
-// };
+const callculateTotalRevenueToDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield order_model_1.default.aggregate([
+        //stage-1
+        {
+            $group: {
+                _id: null,
+                totalRevenue: { $sum: '$totalPrice' },
+            },
+        },
+        //stage-2
+        {
+            $project: { _id: 0, totalRevenue: 1 },
+        },
+    ]);
+    return result;
+});
 const verifyPayment = (order_id) => __awaiter(void 0, void 0, void 0, function* () {
     const verifiedPayment = yield order_uitls_1.orderUitls.verifiedPaymentAsync(order_id);
     if (verifiedPayment.length) {
@@ -172,4 +210,5 @@ exports.OrderServices = {
     acceptOrderIntoDB,
     cancleOrderIntoDB,
     verifyPayment,
+    callculateTotalRevenueToDB,
 };

@@ -50,6 +50,13 @@ const createProductValidationSchema = z.object({
       required_error: 'Instock is requird',
       invalid_type_error: 'Instock must be a boolen',
     }),
+    rating: z
+      .number({
+        required_error: 'Rating is requird',
+        invalid_type_error: 'Rating must be a boolen',
+      })
+      .min(1, { message: 'Rating must be at least 1' })
+      .max(5, { message: 'Rating must be at most 5' }),
   }),
 });
 
@@ -110,6 +117,14 @@ const updateProductValidationSchema = z.object({
         required_error: 'InStock is required',
         invalid_type_error: 'InStock must be a boolean',
       })
+      .optional(),
+    rating: z
+      .number({
+        required_error: 'Rating is requird',
+        invalid_type_error: 'Rating must be a boolen',
+      })
+      .min(1, { message: 'Rating must be at least 1' })
+      .max(5, { message: 'Rating must be at most 5' })
       .optional(),
   }),
 });

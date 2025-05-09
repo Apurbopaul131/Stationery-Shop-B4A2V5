@@ -23,6 +23,6 @@ router.patch('/orders/accept-order/:orderId', (0, auth_1.default)(user_constant_
 router.delete('/orders/cancle-order/:orderId', (0, auth_1.default)(user_constant_1.USER_ROLE === null || user_constant_1.USER_ROLE === void 0 ? void 0 : user_constant_1.USER_ROLE.admin), order_controller_1.OrderControllers.cancleOrder);
 router.get('/orders/verify', (0, auth_1.default)(user_constant_1.USER_ROLE.user), order_controller_1.OrderControllers.verifyPayment);
 //create get route to handle all post request to client
-// router.get('/orders/revenue', OrderControllers.callculateRevenue);
+router.get('/orders/revenue', (0, auth_1.default)(user_constant_1.USER_ROLE === null || user_constant_1.USER_ROLE === void 0 ? void 0 : user_constant_1.USER_ROLE.admin, user_constant_1.USER_ROLE === null || user_constant_1.USER_ROLE === void 0 ? void 0 : user_constant_1.USER_ROLE.user), order_controller_1.OrderControllers.callculateRevenue);
 //export router
 exports.orderRouter = router;

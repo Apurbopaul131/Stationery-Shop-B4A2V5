@@ -4,8 +4,16 @@ import sendResponse from '../../uitls/sendResponse';
 import { AdminServices } from './admin.service';
 
 const createProduct = catchAsync(async (req: Request, res: Response) => {
-  const { _id, brand, price, category, description, quantity, inStock } =
-    await AdminServices.createProductToDB(req.body);
+  const {
+    _id,
+    brand,
+    price,
+    category,
+    description,
+    quantity,
+    inStock,
+    rating,
+  } = await AdminServices.createProductToDB(req.body);
 
   //send response to client
   sendResponse(res, {
@@ -20,6 +28,7 @@ const createProduct = catchAsync(async (req: Request, res: Response) => {
       description,
       quantity,
       inStock,
+      rating,
     },
   });
 });

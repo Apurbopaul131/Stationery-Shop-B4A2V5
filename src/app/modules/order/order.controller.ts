@@ -22,24 +22,29 @@ const createOrder = catchAsync(async (req: Request, res: Response) => {
 
 //view all order
 const viewOrders = catchAsync(async (req: Request, res: Response) => {
-  const result = await OrderServices.viewAllOrderFromDB();
+  const { meta, result } = await OrderServices.viewAllOrderFromDB(req?.query);
   //send response to client
   sendResponse(res, {
     success: true,
     statusCode: 200,
     message: 'Orders retrived successfully.',
+    meta,
     data: result,
   });
 });
 
 //view user specific orders
 const getMeOrders = catchAsync(async (req: Request, res: Response) => {
-  const result = await OrderServices.getMeOrdersFromDB(req?.user?.email);
+  const { meta, result } = await OrderServices.getMeOrdersFromDB(
+    req?.user?.email,
+    req?.query,
+  );
   //send response to client
   sendResponse(res, {
     success: true,
     statusCode: 200,
     message: 'User orders retrived successfully.',
+    meta,
     data: result,
   });
 });
@@ -68,15 +73,15 @@ const cancleOrder = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-//callculate total revenue
-// const callculateRevenue = async (req: Request, res: Response): Promise<any> => {
-//   const result = await orderServices.callculateTotalRevenueToDB();
-//   return res.status(200).json({
-//     message: 'Revenue calculated successfully',
-//     success: true,
-//     data: result,
-//   });
-// };
+// callculate total revenue
+const callculateRevenue = async (req: Request, res: Response): Promise<any> => {
+  const result = await OrderServices.callculateTotalRevenueToDB();
+  return res.status(200).json({
+    message: 'Revenue calculated successfully',
+    success: true,
+    data: result,
+  });
+};
 
 //Verify the payment successful or not
 const verifyPayment = catchAsync(async (req, res) => {
@@ -98,4 +103,5 @@ export const OrderControllers = {
   acceptOrder,
   cancleOrder,
   verifyPayment,
+  callculateRevenue,
 };

@@ -5,3 +5,4 @@ export const orderStatus = [
   'Completed',
   'Cancelled',
 ];
+export const orderSearchableFields = ['status'];

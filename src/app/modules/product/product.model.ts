@@ -54,6 +54,10 @@ const StationeryProductSchema = new mongoose.Schema<
       type: Boolean,
       default: false,
     },
+    rating: {
+      type: Number,
+      required: [true, 'Rating is required'],
+    },
   },
   {
     timestamps: true, // Adds createdAt and updatedAt fields automatically

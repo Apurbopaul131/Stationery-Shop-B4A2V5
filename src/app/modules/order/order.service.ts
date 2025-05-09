@@ -3,8 +3,10 @@ import AppError from '../../error/AppError';
 import { StationeryProductModel } from '../product/product.model';
 import { TOrder } from './order.interface';
 
+import QueryBuilder from '../../builder/QueryBuilder';
 import { TStationeryProduct } from '../product/product.interface';
 import { User } from '../user/user.model';
+import { orderSearchableFields } from './order.constants';
 import OrderModel from './order.model';
 import { orderUitls } from './order.uitls';
 
@@ -74,26 +76,72 @@ const createOrderIntoDB = async (
   return payment?.checkout_url;
 };
 
-const viewAllOrderFromDB = async () => {
-  const result = await OrderModel.find({
-    'transaction.payment_status': 'Success',
-  })
+const viewAllOrderFromDB = async (query: Record<string, unknown>) => {
+  // const result = await OrderModel.find({
+  //   'transaction.payment_status': 'Success',
+  // })
+  //   .select('email product quantity totalPrice status transaction')
+  //   .populate({
+  //     path: 'product',
+  //     select: 'name barnd price category image description quantity inStock',
+  //   });
+  // return result;
+
+  const orderQuery = new QueryBuilder(
+    OrderModel.find({
+      'transaction.payment_status': 'Success',
+    }),
+    query,
+  )
+    .search(orderSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+  const meta = await orderQuery.countTotal();
+  const result = await orderQuery.modelQuery
     .select('email product quantity totalPrice status transaction')
     .populate({
       path: 'product',
       select: 'name barnd price category image description quantity inStock',
     });
-  return result;
+  return {
+    meta,
+    result,
+  };
 };
 
-const getMeOrdersFromDB = async (userEmail: string) => {
-  const result = await OrderModel.find({ email: userEmail })
+const getMeOrdersFromDB = async (
+  userEmail: string,
+  query: Record<string, unknown>,
+) => {
+  // const result = await OrderModel.find({ email: userEmail })
+  //   .select('email product quantity totalPrice status transaction')
+  //   .populate({
+  //     path: 'product',
+  //     select: 'name barnd price category image description quantity inStock',
+  //   });
+  // return result;
+  const orderQuery = new QueryBuilder(
+    OrderModel.find({ email: userEmail }),
+    query,
+  )
+    .search(orderSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+  const meta = await orderQuery.countTotal();
+  const result = await orderQuery.modelQuery
     .select('email product quantity totalPrice status transaction')
     .populate({
       path: 'product',
       select: 'name barnd price category image description quantity inStock',
     });
-  return result;
+  return {
+    meta,
+    result,
+  };
 };
 
 const acceptOrderIntoDB = async (orderId: string) => {
@@ -128,22 +176,22 @@ const cancleOrderIntoDB = async (orderId: string) => {
   return deletedOrder;
 };
 //Callculate total revenue from all database orders
-// const callculateTotalRevenueToDB = async () => {
-//   const result = await OrderModel.aggregate([
-//     //stage-1
-//     {
-//       $group: {
-//         _id: null,
-//         totalRevenue: { $sum: '$totalPrice' },
-//       },
-//     },
-//     //stage-2
-//     {
-//       $project: { _id: 0, totalRevenue: 1 },
-//     },
-//   ]);
-//   return result;
-// };
+const callculateTotalRevenueToDB = async () => {
+  const result = await OrderModel.aggregate([
+    //stage-1
+    {
+      $group: {
+        _id: null,
+        totalRevenue: { $sum: '$totalPrice' },
+      },
+    },
+    //stage-2
+    {
+      $project: { _id: 0, totalRevenue: 1 },
+    },
+  ]);
+  return result;
+};
 const verifyPayment = async (order_id: string) => {
   const verifiedPayment = await orderUitls.verifiedPaymentAsync(order_id);
   if (verifiedPayment.length) {
@@ -193,4 +241,5 @@ export const OrderServices = {
   acceptOrderIntoDB,
   cancleOrderIntoDB,
   verifyPayment,
+  callculateTotalRevenueToDB,
 };

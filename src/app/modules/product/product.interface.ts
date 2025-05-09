@@ -19,6 +19,7 @@ export type TStationeryProduct = {
   quantity: number;
   inStock: boolean;
   isDeleted: boolean;
+  rating: number;
 };
 export interface ProductModel extends Model<TStationeryProduct> {
   findProductById(productId: string): Promise<TStationeryProduct>;

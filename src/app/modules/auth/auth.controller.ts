@@ -54,6 +54,7 @@ const getUser = catchAsync(async (req, res) => {
       email: result?.email,
       image: result?.image,
       role: result?.role,
+      isBlocked: result?.isBlocked,
     },
   });
 });
